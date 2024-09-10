@@ -1,0 +1,5 @@
+Started by user Kamil G
+Running as SYSTEM
+Building in workspace C:\Users\kamil\.jenkins\workspace\Postman Trello Project
+[Postman Trello Project] $ "C:\Program Files\Git\git-bash.exe" -xe C:\Users\kamil\AppData\Local\Temp\jenkins4019010753681283946.sh
+Finished: SUCCESS

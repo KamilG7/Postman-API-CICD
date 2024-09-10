@@ -1,0 +1,1154 @@
+{
+	"info": {
+		"_postman_id": "90dee298-8832-413b-8d0b-44d4d6df419e",
+		"name": "Postman-API-CICD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31162829"
+	},
+	"item": [
+		{
+			"name": "000_Boards",
+			"item": [
+				{
+					"name": "TC1001 - Create a \"New Board\" with valid data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody;\r",
+									"\r",
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"    responseBody = pm.response.json(); \r",
+									"})\r",
+									"\r",
+									"pm.test(\"Verify board name - should be same as in request\", () => {   \r",
+									"    pm.expect(responseBody.name).to.be.equal(pm.collectionVariables.get(\"boardName\"));\r",
+									"})\r",
+									"\r",
+									"pm.collectionVariables.set(\"boardID\", responseBody.id)\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/boards/?name={{boardName}}&key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{boardName}}"
+								},
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1002 - Create a \"New Board\" with invalid data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify response status and code - expected 400 Bad Request\", () => {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"Bad Request\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/boards/?key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1003 - Retrieve existing board using valid id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/boards/{{boardID}}?key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1004 - Get board by invalid id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify response status and code - expected 404 Not Found\", () => {\r",
+									"    pm.response.to.have.status(404);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"Not Found\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/boards/?id=999&key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "999"
+								},
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1005 - Update a board name",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"boardName\", \"TestAPI2\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody;\r",
+									"\r",
+									"pm.test(\"Verify response status and code - expected 200 OK\",() => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"    responseBody = pm.response.json(); \r",
+									"})\r",
+									"\r",
+									"pm.test(\"Verify if boards name is updated\", () => {\r",
+									"    //boardName variable is updated in Pre-request to new value\r",
+									"    pm.expect(responseBody.name).to.be.eql(pm.collectionVariables.get(\"boardName\"));\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/boards/{{boardID}}?key={{Key}}&token={{Token}}&name={{boardName}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								},
+								{
+									"key": "name",
+									"value": "{{boardName}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1006 - Return list of boards for a member",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody;\r",
+									"\r",
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"    responseBody = pm.response.json() ;\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Created board is in a response\", () => {\r",
+									"    let idarray = [];\r",
+									"    responseBody.forEach(board => {\r",
+									"        idarray.push(board.id)\r",
+									"    });\r",
+									"    pm.expect(idarray).to.include(pm.collectionVariables.get(\"boardID\"));\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/members/{{memberID}}/boards?key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"members",
+								"{{memberID}}",
+								"boards"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1007 - Access a board without valid credentials",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify response status and code - expected 401 Unauthorized\", () => {\r",
+									"    pm.response.to.have.status(401);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"Unauthorized\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/boards/{{boardID}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "001_Lists",
+			"item": [
+				{
+					"name": "TC1009 - Create New List on existing Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody;\r",
+									"\r",
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"    responseBody = pm.response.json(); \r",
+									"})\r",
+									"\r",
+									"pm.test(\"Check if list exist\", () => {\r",
+									"    pm.expect(responseBody.closed).to.be.equal(false);\r",
+									"    pm.expect(responseBody.name).to.be.equal(pm.collectionVariables.get(\"listName\"));\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.collectionVariables.set('ListID', responseBody.id)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/lists?name={{listName}}&idBoard={{boardID}}&key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{listName}}"
+								},
+								{
+									"key": "idBoard",
+									"value": "{{boardID}}"
+								},
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1010 - Get lists on a board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody;\r",
+									"\r",
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"    responseBody = pm.response.json(); \r",
+									"})\r",
+									"\r",
+									"pm.test(\"Verify if lists on board in the response\", () => {\r",
+									"    let idarray = [];\r",
+									"    responseBody.forEach(list => {\r",
+									"        idarray.push(list.id)\r",
+									"    });\r",
+									"    pm.expect(idarray).to.include(pm.collectionVariables.get(\"ListID\"));\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/boards/{{boardID}}/lists?key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1011 - Update a list name",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"listName\", \"TestAPIList2\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody;\r",
+									"\r",
+									"pm.test(\"Verify response status and code - expected 200 OK\",() => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"    responseBody = pm.response.json() ;\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Verify if list name is updated\", () => {\r",
+									"    //listName variable is updated in Pre-request to new value\r",
+									"    pm.expect(responseBody.name).to.be.eql(pm.collectionVariables.get(\"listName\"));\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/lists/{{ListID}}?name={{listName}}&key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"lists",
+								"{{ListID}}"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{listName}}"
+								},
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1012 - Archive a list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody;\r",
+									"\r",
+									"pm.test(\"Verify response status and code - expected 200 OK\",() => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"    responseBody = pm.response.json(); \r",
+									"})\r",
+									"\r",
+									"pm.test(\"Verify if list is archived\", () => {\r",
+									"    pm.expect(responseBody.closed).to.be.true;\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/lists/{{ListID}}/closed?key={{Key}}&token={{Token}}&value=true",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"lists",
+								"{{ListID}}",
+								"closed"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								},
+								{
+									"key": "value",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1013 - Unarchive a list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody;\r",
+									"\r",
+									"pm.test(\"Verify response status and code - expected 200 OK\",() => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"    responseBody = pm.response.json(); \r",
+									"})\r",
+									"\r",
+									"pm.test(\"Verify if list is archived\", () => {\r",
+									"    pm.expect(responseBody.closed).to.be.false;\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/lists/{{ListID}}/closed?key={{Key}}&token={{Token}}&value=false",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"lists",
+								"{{ListID}}",
+								"closed"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								},
+								{
+									"key": "value",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "002_Cards",
+			"item": [
+				{
+					"name": "TC1015 - Create new card on a list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody;\r",
+									"\r",
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"    responseBody = pm.response.json(); \r",
+									"})\r",
+									"\r",
+									"pm.test(\"Check if list exist\", () => {\r",
+									"    pm.expect(responseBody.closed).to.be.equal(false);\r",
+									"})\r",
+									"\r",
+									"pm.collectionVariables.set('cardID', responseBody.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/cards?idList={{ListID}}&key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"cards"
+							],
+							"query": [
+								{
+									"key": "idList",
+									"value": "{{ListID}}"
+								},
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1016 - Get all cards on a list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody;\r",
+									"\r",
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"    responseBody = pm.response.json(); \r",
+									"})\r",
+									"\r",
+									"pm.test(\"Created card is in a response\", () => {\r",
+									"    let idarray = [];\r",
+									"    responseBody.forEach(card => {\r",
+									"        idarray.push(card.id);\r",
+									"    });\r",
+									"    pm.expect(idarray).to.include(pm.collectionVariables.get(\"cardID\"));\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/lists/{{ListID}}/cards?key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"lists",
+								"{{ListID}}",
+								"cards"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1017 - Update a card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody;\r",
+									"\r",
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"    responseBody = pm.response.json(); \r",
+									"})\r",
+									"\r",
+									"pm.test(\"Check if card is updated\", () => {\r",
+									"    pm.expect(responseBody.desc).to.be.equal(\"changed\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/cards/{{cardID}}?key={{Key}}&token={{Token}}&description=true&desc=changed",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"cards",
+								"{{cardID}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								},
+								{
+									"key": "description",
+									"value": "true"
+								},
+								{
+									"key": "desc",
+									"value": "changed"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1018 - Add comment to a card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody;\r",
+									"\r",
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200)\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\")\r",
+									"    responseBody = pm.response.json() \r",
+									"})\r",
+									"\r",
+									"pm.test(\"Check if comment exist\", () => {\r",
+									"    pm.expect(responseBody.data.text).to.be.equal(\"NewComment\")\r",
+									"})\r",
+									"\r",
+									"pm.collectionVariables.set('commentID', responseBody.id)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/cards/{{cardID}}/actions/comments?text=NewComment&key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"cards",
+								"{{cardID}}",
+								"actions",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "NewComment"
+								},
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "003_Delete_created_obj",
+			"item": [
+				{
+					"name": "TC1019 - Delate comment from the card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/cards/{{cardID}}/actions/{{commentID}}/comments?key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"cards",
+								"{{cardID}}",
+								"actions",
+								"{{commentID}}",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1020 - Delete a card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/cards/{{cardID}}?key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"cards",
+								"{{cardID}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1014 - Attemp deleting list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(501);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"Not Implemented\");\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/lists/{{ListID}}?key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"lists",
+								"{{ListID}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TC1008 - Delete a board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify response status and code - expected 200 OK\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/1/boards/{{boardID}}?key={{Key}}&token={{Token}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{Key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "boardName",
+			"value": "TestsAPI",
+			"type": "string"
+		},
+		{
+			"key": "boardID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "BaseURL",
+			"value": "https://api.trello.com",
+			"type": "string"
+		},
+		{
+			"key": "memberID",
+			"value": "66dea6b3b0f03172e62c9c04",
+			"type": "string"
+		},
+		{
+			"key": "listName",
+			"value": "TestListAPI",
+			"type": "string"
+		},
+		{
+			"key": "ListID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "cardID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "commentID",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

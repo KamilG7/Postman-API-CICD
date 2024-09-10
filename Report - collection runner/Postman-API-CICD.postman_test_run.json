@@ -1,0 +1,714 @@
+{
+	"id": "06bde767-ab7a-4391-a91e-3e93a8a1c7e7",
+	"name": "Postman-API-CICD",
+	"timestamp": "2024-09-09T18:00:25.050Z",
+	"collection_id": "31162829-90dee298-8832-413b-8d0b-44d4d6df419e",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 32,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-09-09T18:00:17.329Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "1869e2fe-3318-42c3-950d-4ea48c192831",
+			"name": "TC1001 - Create a \"New Board\" with valid data",
+			"url": "https://api.trello.com/1/boards/?name=TestAPI2&key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 467,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true,
+				"Verify board name - should be same as in request": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify board name - should be same as in request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				467
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true,
+					"Verify board name - should be same as in request": true
+				}
+			]
+		},
+		{
+			"id": "185ab542-8678-47f7-b285-9d7155a171eb",
+			"name": "TC1002 - Create a \"New Board\" with invalid data",
+			"url": "https://api.trello.com/1/boards/?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 183,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Verify response status and code - expected 400 Bad Request": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 400 Bad Request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				183
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 400 Bad Request": true
+				}
+			]
+		},
+		{
+			"id": "59efbacb-a8da-4519-b7f3-3a71adbbec6c",
+			"name": "TC1003 - Retrieve existing board using valid id",
+			"url": "https://api.trello.com/1/boards/66df37b1cf6d74deada6a117?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 192,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				192
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true
+				}
+			]
+		},
+		{
+			"id": "096eb410-e4ab-489e-ab6d-2f085fdcce0a",
+			"name": "TC1004 - Get board by invalid id",
+			"url": "https://api.trello.com/1/boards/?id=999&key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 169,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Verify response status and code - expected 404 Not Found": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 404 Not Found": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				169
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 404 Not Found": true
+				}
+			]
+		},
+		{
+			"id": "a70c6a3e-b4a3-4d5f-83eb-4cdaca9a3e56",
+			"name": "TC1005 - Update a board name",
+			"url": "https://api.trello.com/1/boards/66df37b1cf6d74deada6a117?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D&name=TestAPI2",
+			"time": 259,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true,
+				"Verify if boards name is updated": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify if boards name is updated": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				259
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true,
+					"Verify if boards name is updated": true
+				}
+			]
+		},
+		{
+			"id": "a8cebed6-1f3e-4b36-9e9c-f50fdeb3c111",
+			"name": "TC1006 - Return list of boards for a member",
+			"url": "https://api.trello.com/1/members/66dea6b3b0f03172e62c9c04/boards?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 231,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true,
+				"Created board is in a response": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Created board is in a response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				231
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true,
+					"Created board is in a response": true
+				}
+			]
+		},
+		{
+			"id": "aa4847b3-56fc-4a25-b29c-9eeced52685e",
+			"name": "TC1007 - Access a board without valid credentials",
+			"url": "https://api.trello.com/1/boards/66df37b1cf6d74deada6a117",
+			"time": 166,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Verify response status and code - expected 401 Unauthorized": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 401 Unauthorized": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				166
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 401 Unauthorized": true
+				}
+			]
+		},
+		{
+			"id": "2127d3a3-36cc-4524-9114-7ef13d4464c7",
+			"name": "TC1009 - Create New List on existing Board",
+			"url": "https://api.trello.com/1/lists?name=TestAPIList2&idBoard=66df37b1cf6d74deada6a117&key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 252,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true,
+				"Check if list exist": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if list exist": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				252
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true,
+					"Check if list exist": true
+				}
+			]
+		},
+		{
+			"id": "2d2c0e3d-eea7-4f89-b7a6-d898234c5507",
+			"name": "TC1010 - Get lists on a board",
+			"url": "https://api.trello.com/1/boards/66df37b1cf6d74deada6a117/lists?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 197,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true,
+				"Verify if lists on board in the response": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify if lists on board in the response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				197
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true,
+					"Verify if lists on board in the response": true
+				}
+			]
+		},
+		{
+			"id": "ca395672-c7ac-431d-b2cc-f75568047ef9",
+			"name": "TC1011 - Update a list name",
+			"url": "https://api.trello.com/1/lists/66df37b3e6bcf7fc7c35f6eb?name=TestAPIList2&key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 210,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true,
+				"Verify if list name is updated": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify if list name is updated": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				210
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true,
+					"Verify if list name is updated": true
+				}
+			]
+		},
+		{
+			"id": "d3c485a9-213a-4b08-be86-3bcd9f603f52",
+			"name": "TC1012 - Archive a list",
+			"url": "https://api.trello.com/1/lists/66df37b3e6bcf7fc7c35f6eb/closed?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D&value=true",
+			"time": 290,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true,
+				"Verify if list is archived": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify if list is archived": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				290
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true,
+					"Verify if list is archived": true
+				}
+			]
+		},
+		{
+			"id": "a409a2af-f95e-4189-8702-a4fe3be7aa00",
+			"name": "TC1013 - Unarchive a list",
+			"url": "https://api.trello.com/1/lists/66df37b3e6bcf7fc7c35f6eb/closed?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D&value=false",
+			"time": 357,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true,
+				"Verify if list is archived": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify if list is archived": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				357
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true,
+					"Verify if list is archived": true
+				}
+			]
+		},
+		{
+			"id": "06953b37-554b-40c6-b3cb-d27a832373ea",
+			"name": "TC1015 - Create new card on a list",
+			"url": "https://api.trello.com/1/cards?idList=66df37b3e6bcf7fc7c35f6eb&key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 637,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true,
+				"Check if list exist": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if list exist": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				637
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true,
+					"Check if list exist": true
+				}
+			]
+		},
+		{
+			"id": "75a3375a-7a84-4aff-8bcd-6588a7795093",
+			"name": "TC1016 - Get all cards on a list",
+			"url": "https://api.trello.com/1/lists/66df37b3e6bcf7fc7c35f6eb/cards?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 202,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true,
+				"Created card is in a response": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Created card is in a response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				202
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true,
+					"Created card is in a response": true
+				}
+			]
+		},
+		{
+			"id": "d2f2b39c-2a28-4420-afd6-1b91ce0b56b7",
+			"name": "TC1017 - Update a card",
+			"url": "https://api.trello.com/1/cards/66df37b574277afa9a6fb07c?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D&description=true&desc=changed",
+			"time": 333,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true,
+				"Check if card is updated": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if card is updated": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				333
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true,
+					"Check if card is updated": true
+				}
+			]
+		},
+		{
+			"id": "913fb575-63ea-4301-b7f7-4da37bab67ce",
+			"name": "TC1018 - Add comment to a card",
+			"url": "https://api.trello.com/1/cards/66df37b574277afa9a6fb07c/actions/comments?text=NewComment&key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 301,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true,
+				"Check if comment exist": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if comment exist": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				301
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true,
+					"Check if comment exist": true
+				}
+			]
+		},
+		{
+			"id": "9069b213-13ab-443d-a345-d1acc4b45fdc",
+			"name": "TC1019 - Delate comment from the card",
+			"url": "https://api.trello.com/1/cards/66df37b574277afa9a6fb07c/actions/66df37b6e4e752f194c76720/comments?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 544,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				544
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true
+				}
+			]
+		},
+		{
+			"id": "f9dfdc65-a29a-471a-8314-3db3829744ad",
+			"name": "TC1020 - Delete a card",
+			"url": "https://api.trello.com/1/cards/66df37b574277afa9a6fb07c?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 673,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				673
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true
+				}
+			]
+		},
+		{
+			"id": "15bdd3b0-1696-482d-81cd-5d263f314bb3",
+			"name": "TC1014 - Attemp deleting list",
+			"url": "https://api.trello.com/1/lists/66df37b3e6bcf7fc7c35f6eb?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 196,
+			"responseCode": {
+				"code": 501,
+				"name": "Not Implemented"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				196
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true
+				}
+			]
+		},
+		{
+			"id": "ccf1526a-1648-4be0-b1b5-e84c6e6d6223",
+			"name": "TC1008 - Delete a board",
+			"url": "https://api.trello.com/1/boards/66df37b1cf6d74deada6a117?key=ec15a1340ea5c4857a660476eaef40c7&token=ATTA13428cd23c44c3869763e9b45c3af23a39d91b508cd8c5df7308fef73687dc9bC175FA5D",
+			"time": 1163,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify response status and code - expected 200 OK": true
+			},
+			"testPassFailCounts": {
+				"Verify response status and code - expected 200 OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1163
+			],
+			"allTests": [
+				{
+					"Verify response status and code - expected 200 OK": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 7022,
+	"collection": {
+		"requests": [
+			{
+				"id": "1869e2fe-3318-42c3-950d-4ea48c192831",
+				"method": "POST"
+			},
+			{
+				"id": "185ab542-8678-47f7-b285-9d7155a171eb",
+				"method": "POST"
+			},
+			{
+				"id": "59efbacb-a8da-4519-b7f3-3a71adbbec6c",
+				"method": "GET"
+			},
+			{
+				"id": "096eb410-e4ab-489e-ab6d-2f085fdcce0a",
+				"method": "GET"
+			},
+			{
+				"id": "a70c6a3e-b4a3-4d5f-83eb-4cdaca9a3e56",
+				"method": "PUT"
+			},
+			{
+				"id": "a8cebed6-1f3e-4b36-9e9c-f50fdeb3c111",
+				"method": "GET"
+			},
+			{
+				"id": "aa4847b3-56fc-4a25-b29c-9eeced52685e",
+				"method": "GET"
+			},
+			{
+				"id": "2127d3a3-36cc-4524-9114-7ef13d4464c7",
+				"method": "POST"
+			},
+			{
+				"id": "2d2c0e3d-eea7-4f89-b7a6-d898234c5507",
+				"method": "GET"
+			},
+			{
+				"id": "ca395672-c7ac-431d-b2cc-f75568047ef9",
+				"method": "PUT"
+			},
+			{
+				"id": "d3c485a9-213a-4b08-be86-3bcd9f603f52",
+				"method": "PUT"
+			},
+			{
+				"id": "a409a2af-f95e-4189-8702-a4fe3be7aa00",
+				"method": "PUT"
+			},
+			{
+				"id": "06953b37-554b-40c6-b3cb-d27a832373ea",
+				"method": "POST"
+			},
+			{
+				"id": "75a3375a-7a84-4aff-8bcd-6588a7795093",
+				"method": "GET"
+			},
+			{
+				"id": "d2f2b39c-2a28-4420-afd6-1b91ce0b56b7",
+				"method": "PUT"
+			},
+			{
+				"id": "913fb575-63ea-4301-b7f7-4da37bab67ce",
+				"method": "POST"
+			},
+			{
+				"id": "9069b213-13ab-443d-a345-d1acc4b45fdc",
+				"method": "DELETE"
+			},
+			{
+				"id": "f9dfdc65-a29a-471a-8314-3db3829744ad",
+				"method": "DELETE"
+			},
+			{
+				"id": "15bdd3b0-1696-482d-81cd-5d263f314bb3",
+				"method": "DELETE"
+			},
+			{
+				"id": "ccf1526a-1648-4be0-b1b5-e84c6e6d6223",
+				"method": "DELETE"
+			}
+		]
+	}
+}
